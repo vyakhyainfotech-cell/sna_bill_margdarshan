@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SNA સ્પર્શ - પૂર્વ તૈયારી બિલ કેલ્ક્યુલેટર</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            --accent: #0284c7;
+            --secondary: #0d9488;
+            --danger: #ef4444;
+            --danger-soft: #fef2f2;
+            --success: #16a34a;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans Gujarati', 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: var(--gray-800);
+            margin: 0;
+            padding: 12px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* Top Hero Header */
+        .app-hero {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            padding: 16px 18px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .hero-title h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            margin: 0;
+            font-size: 12.5px;
+            color: #dbeafe;
+        }
+
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card-header-styled {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .card-header-styled h2 {
+            margin: 0;
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* School Info Grid */
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 13.5px;
+            outline: none;
+            background: #fff;
+            color: var(--gray-800);
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        /* Head allocation row design - Fully Responsive Flex/Grid */
+        .head-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .head-input-wrap {
+            flex: 1 1 280px;
+            width: 100%;
+        }
+
+        .head-amount-wrap {
+            flex: 1 1 120px;
+            min-width: 100px;
+        }
+
+        .head-action-wrap {
+            flex: 0 0 38px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 15px;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-outline-primary {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+
+        .btn-outline-danger {
+            background: var(--danger-soft);
+            color: var(--danger);
+            border: 1px solid #fecaca;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .btn-clear {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-view-60 {
+            background: #059669;
+            color: #ffffff;
+            font-size: 13px;
+            padding: 9px 15px;
+            box-shadow: 0 2px 6px rgba(5, 150, 105, 0.2);
+            flex: 1 1 auto;
+        }
+
+        .btn-view-60:hover {
+            background: #047857;
+        }
+
+        .btn-view-40 {
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 13px;
+            padding: 9px 15px;
+            box-shadow: 0 2px 6px rgba(2, 132, 199, 0.2);
+            flex: 1 1 auto;
+        }
+
+        .btn-view-40:hover {
+            background: #0369a1;
+        }
+
+        .btn-view-combo {
+            background: #7c3aed;
+            color: #ffffff;
+            font-size: 13.5px;
+            padding: 10px 18px;
+            box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);
+            flex: 1 1 100%;
+        }
+
+        /* Screen Preview Table */
+        .table-responsive {
+            overflow-x: auto;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table.preview-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            background: #ffffff;
+        }
+
+        table.preview-table th {
+            background: #f8fafc;
+            color: var(--gray-700);
+            font-weight: 700;
+            padding: 9px 10px;
+            border-bottom: 1.5px solid var(--gray-200);
+            text-align: left;
+        }
+
+        table.preview-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: middle;
+        }
+
+        .head-list-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .head-tag-screen {
+            font-size: 11px;
+            background: #f0fdf4;
+            color: #166534;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #bbf7d0;
+            display: inline-flex;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        .summary-banner {
+            background: #f8fafc;
+            border: 1px solid #c7d2fe;
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .grand-highlight {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* ==================== MODAL (PREVIEW POPUP) STYLING ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(2px);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 10px 6px;
+        }
+
+        .modal-container {
+            background: #ffffff;
+            max-width: 880px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+        }
+
+        .modal-top-bar {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-modal-print {
+            background: #10b981;
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 12.5px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-modal-print:hover {
+            background: #059669;
+        }
+
+        .btn-close-modal {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-close-modal:hover {
+            background: #dc2626;
+        }
+
+        .modal-content-area {
+            padding: 12px;
+            background: #ffffff;
+            overflow-x: auto;
+        }
+
+        /* ==================== A4 SINGLE PAGE & A5 SPLIT LAYOUT ==================== */
+        .printable-sheet {
+            background: #ffffff;
+            color: #000;
+            font-size: 11px;
+            line-height: 1.35;
+            min-width: 580px;
+        }
+
+        .sheet-section-half {
+            padding: 4px 0;
+        }
+
+        .cut-divider {
+            border-top: 1.5px dashed #475569;
+            margin: 10px 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .cut-label {
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            padding: 0 8px;
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .sheet-header-card {
+            border: 1.2px solid #000;
+            border-radius: 4px;
+            padding: 5px 8px;
+            text-align: center;
+            margin-bottom: 6px;
+            background: #fff;
+        }
+
+        .sheet-header-card h2 {
+            margin: 0;
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .sheet-header-meta {
+            font-size: 10px;
+            font-weight: 600;
+            color: #222;
+            margin: 2px 0 3px;
+        }
+
+        .sheet-badge {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 1.5px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 14px;
+        }
+
+        .voucher-meta-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 6px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        .sheet-section-title {
+            font-size: 10.5px;
+            font-weight: 800;
+            background: #f1f5f9;
+            color: #000;
+            padding: 3px 6px;
+            border-left: 3.5px solid #000;
+            margin: 5px 0 4px;
+        }
+
+        .sheet-edp-box {
+            border: 1.2px solid #000;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+        }
+
+        .sheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+
+        .sheet-table th, .sheet-table td {
+            border: 1px solid #334155;
+            padding: 3px 5px;
+            vertical-align: middle;
+        }
+
+        .sheet-table th {
+            background: #f1f5f9;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* Aligned Table for Section 3 */
+        .sub-align-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sub-align-table tr td {
+            border: none !important;
+            padding: 1px 2px !important;
+            vertical-align: baseline;
+        }
+
+        .sub-align-table tr:not(:last-child) {
+            border-bottom: 1px dashed #cbd5e1 !important;
+        }
+
+        .sub-head-name {
+            font-size: 9.5px;
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .sub-head-amt {
+            text-align: right;
+            font-size: 10px;
+            font-weight: 700;
+            color: #000;
+            white-space: nowrap;
+            width: 85px;
+        }
+
+        /* Mobile specific adjustments */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 8px 6px;
+            }
+            .card {
+                padding: 12px;
+            }
+            .hero-title h1 {
+                font-size: 18px;
+            }
+            .head-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .head-input-wrap, .head-amount-wrap {
+                width: 100%;
+                flex: none;
+            }
+            .head-action-wrap {
+                justify-content: flex-end;
+            }
+            .btn {
+                width: 100%;
+            }
+            .btn-view-combo, .btn-view-60, .btn-view-40 {
+                width: 100%;
+            }
+        }
+
+        /* Print Media Query */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 6mm 8mm;
+            }
+
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .no-print, .modal-top-bar {
+                display: none !important;
+            }
+
+            .modal-overlay {
+                display: block !important;
+                position: static !important;
+                background: transparent !important;
+                padding: 0 !important;
+            }
+
+            .modal-container {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .modal-content-area {
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+
+            .printable-sheet {
+                font-size: 9.5px !important;
+                line-height: 1.2 !important;
+                min-width: auto !important;
+            }
+
+            .sheet-table th, .sheet-table td {
+                padding: 2px 4px !important;
+            }
+
+            .sheet-section-title {
+                margin: 4px 0 3px !important;
+                padding: 2px 4px !important;
+                font-size: 9.5px !important;
+            }
+
+            .sheet-edp-box {
+                margin-bottom: 4px !important;
+                padding: 3px 6px !important;
+            }
+
+            .sheet-header-card {
+                padding: 3px 6px !important;
+                margin-bottom: 4px !important;
+            }
+
+            .sheet-header-card h2 {
+                font-size: 13px !important;
+            }
+
+            .cut-divider {
+                margin: 6px 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hidden Datalist for Fast Autocomplete/Search -->
+<datalist id="headsDatalist">
+</datalist>
+
+<div class="container no-print">
+
+    <!-- Hero Header -->
+    <div class="app-hero">
+        <div class="hero-title">
+            <span style="font-size: 24px;">📑</span>
+            <h1>SNA સ્પર્શ - પૂર્વ તૈયારી બિલ કેલ્ક્યુલેટર</h1>
+        </div>
+        <p class="hero-subtitle">મોબાઈલ & ડેસ્કટોપ અનુકૂળ ડિઝાઇન | સમગ્ર શિક્ષા (IA Portal) હેડ સ્માર્ટ સર્ચ</p>
+    </div>
+
+    <!-- School Information Card -->
+    <div class="card">
+        <div class="card-header-styled">
+            <h2><span>🏫</span> શાળા તેમજ વાઉચરની વિગત</h2>
+            <span style="font-size: 11.5px; color: #64748b;">(પ્રિન્ટ સ્લિપ માટે)</span>
+        </div>
+        <div class="school-grid">
+            <div class="form-group">
+                <label for="schoolName">શાળાનું નામ:</label>
+                <input type="text" id="schoolName" class="form-control" placeholder="દા.ત. પ્રાથમિક શાળા...">
+            </div>
+            <div class="form-group">
+                <label for="udiseCode">UDISE કોડ:</label>
+                <input type="text" id="udiseCode" class="form-control" placeholder="દા.ત. 241907...">
+            </div>
+            <div class="form-group">
+                <label for="voucherNo">વાઉચર સંદર્ભ / ફાઈલ નંબર:</label>
+                <input type="text" id="voucherNo" class="form-control" placeholder="દા.ત. 15/2026-27">
+            </div>
+            <div class="form-group">
+                <label for="billDate">તારીખ:</label>
+                <input type="date" id="billDate" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <!-- Beneficiary Entry Form -->
+    <div class="card" style="border-top: 4px solid #2563eb;">
+        <div class="card-header-styled">
+            <h2><span>➕</span> નવો લાભાર્થી ઉમેરો</h2>
+            <span style="font-size:11.5px; color:#2563eb; background:#eff6ff; padding:2px 6px; border-radius:4px; font-weight:600;">નવી એન્ટ્રી</span>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+            <div class="form-group">
+                <label for="beneficiaryName">લાભાર્થીનું નામ / પેઢીનું નામ: <span style="color:var(--danger)">*</span></label>
+                <input type="text" id="beneficiaryName" class="form-control" placeholder="લાભાર્થી / દુકાનદારનું નામ દાખલ કરો..." style="font-size: 14px;">
+            </div>
+        </div>
+
+        <!-- Dynamic Head Allocation Section -->
+        <div style="background: #f8fafc; border: 1.5px dashed #cbd5e1; padding: 10px; border-radius: var(--radius-md);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px; flex-wrap:wrap; gap:6px;">
+                <label style="font-weight: 700; font-size: 12.5px; color: var(--primary);">
+                    ગ્રાન્ટ હેડ સર્ચ અને રકમ ફાળવણી (૧૦૦% મૂળ રકમ):
+                </label>
+                <button type="button" class="btn btn-outline-primary" style="padding: 4px 10px; font-size: 12px;" onclick="addHeadRow()">
+                    + હેડ ઉમેરો
+                </button>
+            </div>
+
+            <div id="headsContainer">
+                <!-- Head input rows dynamically generated here -->
+            </div>
+        </div>
+
+        <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary" style="flex:1 1 140px;" onclick="saveBeneficiary()">
+                💾 લાભાર્થી સેવ કરો
+            </button>
+            <button type="button" class="btn btn-clear" style="flex:1 1 120px;" onclick="resetForm()">
+                ફોર્મ ખાલી કરો
+            </button>
+        </div>
+    </div>
+
+    <!-- Beneficiary List Card -->
+    <div class="card">
+        <div class="card-header-styled">
+            <h2><span>📋</span> ઉમેરેલા લાભાર્થીઓની યાદી</h2>
+            <button type="button" class="btn btn-clear" style="padding: 3px 8px; font-size: 11.5px;" onclick="clearAllData()">
+                🗑️ બધો ડેટા સાફ કરો
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="preview-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40px; text-align: center;">ક્રમ</th>
+                        <th>લાભાર્થીનું નામ</th>
+                        <th>હેડ વાઇઝ વિગત (૧૦૦%)</th>
+                        <th style="text-align: right; width: 110px;">કુલ રકમ</th>
+                        <th style="text-align: right; width: 100px; color:#059669;">૬૦% રકમ</th>
+                        <th style="text-align: right; width: 100px; color:#0284c7;">૪૦% રકમ</th>
+                        <th style="width: 45px; text-align: center;">ક્રિયા</th>
+                    </tr>
+                </thead>
+                <tbody id="beneficiaryTableBody">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 25px; color: #94a3b8; font-style: italic;">
+                            હજુ સુધી કોઈ લાભાર્થી ઉમેરેલ નથી. કૃપા કરીને ઉપરના ફોર્મમાંથી લાભાર્થી ઉમેરો.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals summary banner -->
+        <div class="summary-banner" id="totalsBar" style="display: none;">
+            <div>
+                <strong>લાભાર્થીઓ:</strong> <span id="countBeneficiaries" style="color:var(--primary); font-weight:700;">0</span> | 
+                <strong>ગ્રાન્ટ હેડ:</strong> <span id="countHeads" style="color:var(--primary); font-weight:700;">0</span>
+            </div>
+            <div class="grand-highlight">
+                કુલ રકમ: ₹<span id="grandTotal">0.00</span> 
+                <div style="font-size:12px; font-weight:600; color:#475569; margin-top:2px;">
+                    (૬૦%: <span style="color:#059669;">₹<span id="grand60">0.00</span></span> | ૪૦%: <span style="color:#0284c7;">₹<span id="grand40">0.00</span></span>)
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Preview Buttons (Mobile Optimized) -->
+        <div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;">
+            <button type="button" class="btn btn-view-60" onclick="openPreviewModal('60')">
+                👁️ ૬૦% બિલ જુઓ
+            </button>
+            <button type="button" class="btn btn-view-40" onclick="openPreviewModal('40')">
+                👁️ ૪૦% બિલ જુઓ
+            </button>
+            <button type="button" class="btn btn-view-combo" onclick="openPreviewModal('both_a5')">
+                📄 ૧ જ પેજમાં બંને જુઓ (ઉપર ૬૦% + નીચે ૪૦% A5)
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PREVIEW MODAL POPUP ==================== -->
+<div id="previewModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-top-bar">
+            <div class="modal-title" id="modalHeading">
+                <span>👁️</span> બિલ પ્રિવ્યુ
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-modal-print" onclick="window.print()">
+                    🖨️ પ્રિન્ટ કાઢો (૧ પેજ)
+                </button>
+                <button type="button" class="btn-close-modal" onclick="closePreviewModal()">
+                    ✕ બંધ કરો
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-content-area">
+            <div id="printableContent" class="printable-sheet">
+                <!-- Dynamically populated clean preview content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // All 180 Grant Heads from IA_Portal Samagra Shiksha Gujarat (Component Code and Description only)
+    const allGrantHeads = ["1.6.2.8.1 - SCERT", "A.01 - Payment for professional service (Renumeration of staff/ consultant/ professionals etc)", "B.01 - Furniture", "B.02 - Office Machine and Equipments", "C.01 - Wages (outsource staff salary i.e. peon, security guards, DEOs, Receptionist, Office Assistant etc)", "C.02 - Travel Expenses (Domestic and International Travels)", "C.03 - Office Expenses", "D.01 - Miscellaneous Program Activity", "E.01 - Human Resources", "E.02 - Infrastructure", "E.03 - Stationery, Books and other items", "E.04 - Translation & adaptation", "E.05 - Travel and Stay", "E.06 - Printing", "E.07 - Postage", "E.08 - Publicity and Material development", "E.09 - Miscellaneous", "E.10 - Capacity building of teachers and students", "F.01.01.01 - Opening of New Schools (NR) - (Elementary)", "F.01.01.02 - Opening of New Schools (R) - (Elementary)", "F.01.02.01 - Residential Schools - NR", "F.01.02.02 - Residential Schools - Recurring", "F.01.02.03 - Residential Schools - NR (Residential Hostel)", "F.01.02.04 - Residential Schools- Recurring (Residential Hostel)", "F.01.03.01.1 - Additional Classrooms (Upto Class VIII)", "F.01.03.01.10 - Dilapidated Building (Upper Primary)", "F.01.03.01.2 - Boys Toilets", "F.01.03.01.3 - Girls Toilets (Upto Class VIII)", "F.01.03.01.4 - CWSN Toilets (Upto Class VIII)", "F.01.03.01.5 - Major Repair", "F.01.03.01.6 - Building Less Schools (Primary)", "F.01.03.01.7 - Dilapidated Building (Primary)", "F.01.03.01.8 - Minor Repair", "F.01.03.01.9 - Building Less Schools (Upper Primary)", "F.01.03.02.1 - BRC / URC", "F.01.03.03 - Strengthening of Residential Schools - NR (up to Highest Class VIII)", "F.01.04.01.1 - Urban deprived children/children without adult protection", "F.01.04.01.2 - Children in remote habitation", "F.01.05.1 - All Girls (Uniform)", "F.01.05.2 - ST Boys (Uniform)", "F.01.05.3 - SC Boys (Uniform)", "F.01.05.4 - BPL Boys (Uniform)", "F.01.06.1 - Braille Books (Class I II)", "F.01.06.2 - Large Print Books (Class I II)", "F.01.06.3 - Braille Books (Class III - V)", "F.01.06.4 - Large Print Books (Class III - V)", "F.01.06.5 - Text Books (Class VI - VIII)", "F.01.06.6 - Braille Books (Class VI VIII)", "F.01.06.7 - Large Print Books (Class VI - VIII)", "F.01.07.1 - Reimbursement towards expenditure incurred for 25per. of Admission under 12 (1) (c) RTE Act", "F.01.07.2.1 - Special Training for OoSC - Non- Residential (Fresh) / 1-12 Month (Non-Residential - Fresh)", "F.01.07.2.2 - Special Training for OoSC - Residential (Fresh) 1-12 Month (Residential - Fresh)", "F.01.07.2.3 - Special Training for OoSC Non Residential (Previous year) 1-9 Months (Non-Residential-PrevYear)", "F.01.07.2.4 - 1-6 Months (Non-Residential - Intervention for Migrant Children (Non- Residential) Migrant)", "F.01.07.2.5 - Intervention for Migrant Children (Residential)1-6 Months (Residential - Migrant)", "F.01.07.2.6 - Intervention for Migrant Children (Residential)1-9 Months (Residential - Migrant)", "F.01.07.2.7 - 1-3 Months (Non-Residential - Intervention for Migrant Children (Non- Residential) Migrant)", "F.01.07.2.8 - Open Schooling for out of school Children", "F.01.07.3 - Support to SCPCR (Upto Highest Class VIII)", "F.01.07.4.1 - Text Books (Class III - V)", "F.01.08.01 - Special Training for OoSC - Non-Residential (Fresh)", "F.01.08.02 - Special Training for OoSC - Residential (Fresh)", "F.01.08.03 - Special Training for OoSC - Non-Residential (Previous Year)", "F.01.08.04 - Special Training for OoSC - Residential (Previous Year)", "F.01.08.05 - Intervention for Migrant Children/ Seasonal Hostel - Non-Residential", "F.01.08.06 - Intervention for Migrant Children/ Seasonal Hostel - (Residential)", "F.01.08.07 - Coverage of Religious Intitutions", "F.01.09.01.1 - Training of SMC/ SDMC", "F.01.09.01.2 - Community Mobilization", "F.01.09.02 - Logo and Display Board- Samagra Shiksha (for all Schools) (Elementary)", "F.01.10 - Training of SMC/SMDC (Elementary)", "F.01.11.01 - Display Board on Safety Guidelines (Elementary)", "F.01.12.01 - Youth & Eco Club (Elementary)", "F.01.12.02 - Youth & Eco Club (Stand alone Primary Schools) (Elementary)", "F.01.12.10 - Transport (Balvatika)", "F.01.12.11 - Social Science kit", "F.01.12.12 - Organic Farming Project", "F.01.12.13 - Bal Sansad", "F.01.12.14 - Exposure to Vocational Education (Class 6 - 8)", "F.01.12.15 - EK BHARAT SHRESTH BHARAT", "F.01.12.16 - Awarness of Vidhyanjali", "F.01.12.17 - Eco Clubs for mission life", "F.01.12.18 - BRC/CRC training at state level", "F.01.12.19 - Readliness programme", "F.01.12.20 - Awareness of Vidhyanjali 2", "F.01.12.21 - Nipunotsav", "F.01.12.22 - Use of technology in education", "F.01.12.23 - Implementation guideline for HPC", "F.01.12.24 - Psychometric Test for 6 to 8 Students", "F.01.12.25 - FLN Campaign (balvatika to gread 5 per school)", "F.01.12.26 - Science Exhibition / Book Fair", "F.01.12.27 - HEADS CAPACITY BUIDING", "F.01.12.28 - Annual external evaluation of schools by DIET for FLN", "F.01.12.29 - English Language Lab platform", "F.01.12.3 - Holistic Report Card for Students (Elementary)", "F.01.12.30 - Secondary education CwSN Support allowance", "F.01.12.4.1 - Resource Room Maintenance For CWSN", "F.01.12.5 - Orientation Programme for Teachers on Safety and Security", "F.01.12.6 - Fund for Safety and Security at School Level", "F.01.12.7 - Shaala Siddhi", "F.01.12.8 - Strengthening of Sports Education", "F.01.12.9 - Twinning of schools", "F.01.13.01 - LEP (Class I-II)", "F.01.13.02 - LEP (Class III-V)", "F.01.13.03.1 - Learning Enhancement/Enrichment Programme (Remedial Teaching)", "F.01.13.4.1 - Rangotsav", "F.01.13.5.1 - ICT Facility to BRCs", "F.01.13.5.2 - E-learning support for hearing impaired student", "F.01.13.5.3 - Center of excellence/sports school of excellence", "F.01.14 - School Audit (Shagunotsav) (Elementary)", "F.01.15.1.1 - Teaching Learning Materials for implementation of Innovative pedagogies", "F.01.15.1.2 - Capacity building of Teachers of Grades I to V (New)", "F.01.15.2.1 - Formation of PMU (Elementary)", "F.01.15.3.1 - Science Exhibition / Book Fair", "F.01.15.3.2 - Excursion Trip for Students within State", "F.01.15.3.3 - Formation of Science / Maths Clubs", "F.01.15.4.1 - Pre- Primary (Recurring) TLM for Children", "F.01.15.4.2 - Child Friendly Furniture Pre- Primary (Non- Recurring)", "F.01.15.4.3 - BALA Features Pre- Primary (Non- Recurring)", "F.01.15.4.4 - Out Door Play Materials Pre- Primary (Non- Recurring)", "F.01.15.4.5 - Pre- Primary (Non- Recurring)", "F.01.15.5.1 - Teacher Resource Material/ Activity Handbook of Grades I to II", "F.01.15.5.2 - Capacity building of Teachers from Pre-Primary Grades I and II", "F.01.15.5.3 - Teaching lerning materials of implementation of innovative pedagogies from balvatika to grade 5", "F.01.15.5.4 - Teacher Resource Material / Activity Handbook of Grades I to V", "F.01.15.5.5 - Formation of PMU (Elementary) -District Level", "F.01.15.6.1 - Mock Tests for class 3 to 8 for Learning Enhancement (Printing of Question Papers and OMR Sheets)", "F.01.16.01 - School based Assessment (Elementary)", "F.01.17.1 - Teachers Class I to V (Government Schools)", "F.01.17.2 - Teachers Class VI to VII (Government Schools)", "F.01.17.3 - Induction Training (Primary)", "F.01.17.4 - Induction Training (Upper Primary)", "F.01.17.5 - One Day Trainig on PRASHAST", "F.01.17.6.1 - Teachers Class VI to VII (Government Schools) [GJ]", "F.01.17.6.2 - Training of Resource person and master Trainers", "F.01.17.6.3 - Teachers class Vl to Vlll (Government Schools)", "F.01.17.6.4 - Induction training (primary)", "F.01.17.6.5 - Physical training programm for genral teacher on inclusive education (5 days)", "F.01.17.6.6 - One day training on PRASHST for head masters for effective identification of CWSN in schools", "F.01.18.1 - 1-School Grant - (Enrol Greater than 30 and Less than equal to 100", "F.01.18.2 - School Grant - (Enrol Greater than 100 and less than equal to 250 )", "F.01.18.3 - School Grant - (Enrol Greater than 250 and less than equal to 1000)", "F.01.18.4 - School Grant - (Enrol Greater than 1000)", "F.01.18.5 - School Grant (Enrol Greater than equal to 1 and less than equal to 30)", "F.01.19.1 - Upper Primary Schools", "F.01.19.2 - Primary Schools", "F.01.20 - Rashtriya Avishkar Abhiyan (RAA) (Elementary)", "F.01.21.01.1 - Smart Classroom (Type - II) (Elementary)", "F.01.21.01.2 - Digital Hardware and Software (Type - I) (Elementary 100 - 250)", "F.01.21.01.3 - Digital Hardware and Software (Type - I) (Elementary 250 - 700)", "F.01.22.01 - Pre-Primary (Non-Recurring)", "F.01.22.02 - Pre-Primary (Recurring)", "F.01.23.01.1 - Financial Support for 1 Accountant-cum-support staff", "F.01.23.01.10 - Academic resource person for career counseling", "F.01.23.01.2 - Financial Support for 1 Data Entry Operator in position", "F.01.23.01.3 - Financial Support for 1 MIS Coordinator in position", "F.01.23.01.4 - Financial Support for 6 Resource Persons at BRC", "F.01.23.01.5 - Maintenance Grant", "F.01.23.01.6 - TLE/TLM Grant", "F.01.23.01.7 - Meeting, TA", "F.01.23.01.8 - Contingency Grant", "F.01.23.01.9 - Financial Support for BRC Coordinator", "F.01.23.02.01 - Furniture Grant / Computer", "F.01.23.02.2 - Maintenance Grant", "F.01.23.02.3 - TLM Grant", "F.01.23.02.4 - Meeting, TA", "F.01.23.02.5 - Contingency Grant", "F.01.23.02.6 - Financial Support for CRC Coordinator (one)", "F.01.24 - Teacher Salary (HMs/ Teachers) (Elementary)", "F.01.25.01 - KGBV- Type-I (NR) (New) (Classes VI-VIII)", "F.01.25.02 - KGBV- Type-I (Recurring) (New) (Classes VI-VIII)", "F.01.25.03 - KGBV- Type-I (NR) (Previous Year) (Classes VI-VIII)", "F.01.25.04.1 - Food/Lodging per child per month", "F.01.25.04.10 - Medical care / Contingencies", "F.01.25.04.11 - Maintenance", "F.01.25.04.12 - Miscellaneous", "F.01.25.04.13 - PTA", "F.01.25.04.14 - Capacity Building", "F.01.25.04.15 - Part Time Teachers", "અન્ય કમ્પોનન્ટ હેડ"];
+
+    // Populate Datalist on Load
+    function populateDatalist() {
+        const dl = document.getElementById('headsDatalist');
+        dl.innerHTML = '';
+        allGrantHeads.forEach(h => {
+            const opt = document.createElement('option');
+            opt.value = h;
+            dl.appendChild(opt);
+        });
+    }
+
+    let beneficiaries = [];
+
+    // Current date default
+    document.getElementById('billDate').valueAsDate = new Date();
+
+    // Initialize 1 blank row in form
+    function initHeadRow() {
+        const container = document.getElementById('headsContainer');
+        container.innerHTML = '';
+        addHeadRow();
+    }
+
+    // Add head input row with mobile-friendly flex structure
+    function addHeadRow(selectedValue = '', amount = '') {
+        const container = document.getElementById('headsContainer');
+        const rowId = 'head_row_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'head-row';
+        rowDiv.id = rowId;
+        rowDiv.innerHTML = `
+            <div class="head-input-wrap">
+                <input type="text" class="form-control head-input" list="headsDatalist" placeholder="હેડ કોડ કે નામ ટાઈપ કરો (દા.ત. F.01.18 અથવા Composite)..." value="${selectedValue}" autocomplete="off" required>
+            </div>
+            <div class="head-amount-wrap">
+                <input type="number" class="form-control head-amount" placeholder="રકમ (₹)" min="1" step="0.01" value="${amount}" required>
+            </div>
+            <div class="head-action-wrap">
+                <button type="button" class="btn btn-outline-danger" onclick="removeHeadRow('${rowId}')" title="હેડ કાઢી નાખો">✕</button>
+            </div>
+        `;
+        container.appendChild(rowDiv);
+    }
+
+    function removeHeadRow(rowId) {
+        const container = document.getElementById('headsContainer');
+        if (container.children.length > 1) {
+            const el = document.getElementById(rowId);
+            if (el) el.remove();
+        } else {
+            alert('ઓછામાં ઓછો એક હેડ રાખવો જરૂરી છે.');
+        }
+    }
+
+    function resetForm() {
+        document.getElementById('beneficiaryName').value = '';
+        initHeadRow();
+        document.getElementById('beneficiaryName').focus();
+    }
+
+    // Save beneficiary
+    function saveBeneficiary() {
+        const nameInput = document.getElementById('beneficiaryName');
+        const name = nameInput.value.trim();
+
+        if (!name) {
+            alert('કૃપા કરીને લાભાર્થીનું નામ લખો.');
+            nameInput.focus();
+            return;
+        }
+
+        const headRows = document.querySelectorAll('#headsContainer .head-row');
+        const heads = [];
+        let hasError = false;
+
+        headRows.forEach(row => {
+            const headName = row.querySelector('.head-input').value.trim();
+            const amountVal = parseFloat(row.querySelector('.head-amount').value);
+
+            if (!headName) {
+                alert('કૃપા કરીને ગ્રાન્ટ હેડ દાખલ કરો અથવા સિલેક્ટ કરો.');
+                hasError = true;
+                return;
+            }
+            if (isNaN(amountVal) || amountVal <= 0) {
+                alert('કૃપા કરીને હેડ માટે માન્ય રકમ દાખલ કરો.');
+                hasError = true;
+                return;
+            }
+
+            heads.push({
+                head: headName,
+                amount: amountVal
+            });
+        });
+
+        if (hasError) return;
+
+        const totalAmount = heads.reduce((sum, h) => sum + h.amount, 0);
+
+        beneficiaries.push({
+            id: Date.now(),
+            name: name,
+            heads: heads,
+            total: totalAmount
+        });
+
+        renderBeneficiariesTable();
+        resetForm();
+    }
+
+    function deleteBeneficiary(index) {
+        if (confirm('શું તમે આ લાભાર્થીની વિગત રદ કરવા માંગો છો?')) {
+            beneficiaries.splice(index, 1);
+            renderBeneficiariesTable();
+        }
+    }
+
+    function clearAllData() {
+        if (beneficiaries.length === 0) return;
+        if (confirm('શું તમે તમામ લાભાર્થીઓની યાદી સાફ કરવા માંગો છો?')) {
+            beneficiaries = [];
+            renderBeneficiariesTable();
+            resetForm();
+        }
+    }
+
+    // Render Preview Table
+    function renderBeneficiariesTable() {
+        const tbody = document.getElementById('beneficiaryTableBody');
+        const totalsBar = document.getElementById('totalsBar');
+
+        if (beneficiaries.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 25px; color: #94a3b8; font-style: italic;">
+                        હજુ સુધી કોઈ લાભાર્થી ઉમેરેલ નથી. કૃપા કરીને ઉપરના ફોર્મમાંથી લાભાર્થી ઉમેરો.
+                    </td>
+                </tr>
+            `;
+            totalsBar.style.display = 'none';
+            return;
+        }
+
+        tbody.innerHTML = '';
+        let grandTotal = 0;
+        const uniqueHeads = new Set();
+
+        beneficiaries.forEach((b, index) => {
+            grandTotal += b.total;
+            const b60 = (b.total * 0.6).toFixed(2);
+            const b40 = (b.total * 0.4).toFixed(2);
+
+            let headsHtml = '<div class="head-list-screen">';
+            b.heads.forEach(h => {
+                uniqueHeads.add(h.head);
+                headsHtml += `
+                    <div class="head-tag-screen">
+                        <span>${h.head}</span>
+                        <strong style="margin-left: 6px;">₹${h.amount.toFixed(2)}</strong>
+                    </div>`;
+            });
+            headsHtml += '</div>';
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="text-align: center; font-weight:700; color:#64748b;">${index + 1}</td>
+                <td><strong style="color:#0f172a; font-size:13px;">${b.name}</strong></td>
+                <td>${headsHtml}</td>
+                <td style="text-align: right; font-weight:700;">₹${b.total.toFixed(2)}</td>
+                <td style="text-align: right; color:#059669; font-weight:700;">₹${b60}</td>
+                <td style="text-align: right; color:#0284c7; font-weight:700;">₹${b40}</td>
+                <td style="text-align: center;">
+                    <button class="btn btn-outline-danger" style="padding:2px 6px; font-size:11px;" onclick="deleteBeneficiary(${index})" title="કાઢી નાખો">✕</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        totalsBar.style.display = 'flex';
+        document.getElementById('countBeneficiaries').textContent = beneficiaries.length;
+        document.getElementById('countHeads').textContent = uniqueHeads.size;
+        document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        document.getElementById('grand60').textContent = (grandTotal * 0.6).toFixed(2);
+        document.getElementById('grand40').textContent = (grandTotal * 0.4).toFixed(2);
+    }
+
+    function numberToGujaratiWords(amount) {
+        const num = Math.round(amount);
+        if (num === 0) return "શૂન્ય પુરા";
+        return num.toLocaleString('en-IN') + " રૂપિયા પુરા";
+    }
+
+    // Helper: Generate Clean Sub-Slip (60% or 40%)
+    function generateSubSlipHtml(multiplier, percentText, badgeBg) {
+        const school = document.getElementById('schoolName').value || 'શાળાનું નામ દર્શાવેલ નથી';
+        const udise = document.getElementById('udiseCode').value || '-';
+        const voucher = document.getElementById('voucherNo').value || '-';
+        const bDate = document.getElementById('billDate').value || '-';
+
+        const headTotals = {};
+        let grandTotal = 0;
+
+        beneficiaries.forEach(b => {
+            b.heads.forEach(h => {
+                if (!headTotals[h.head]) {
+                    headTotals[h.head] = 0;
+                }
+                headTotals[h.head] += h.amount;
+                grandTotal += h.amount;
+            });
+        });
+
+        const splitEdpTotal = (grandTotal * multiplier).toFixed(2);
+        const splitEdpWords = numberToGujaratiWords(grandTotal * multiplier);
+
+        // Section 2: Head rows
+        let headRows = '';
+        let hIdx = 1;
+        for (const [headName, amt] of Object.entries(headTotals)) {
+            headRows += `
+                <tr>
+                    <td style="text-align:center; width:28px;">${hIdx++}</td>
+                    <td>${headName}</td>
+                    <td style="text-align:right; width:100px;">₹ ${amt.toFixed(2)}</td>
+                    <td style="text-align:right; font-weight:700; width:110px; background:#fafafa;">₹ ${(amt * multiplier).toFixed(2)}</td>
+                </tr>
+            `;
+        }
+        headRows += `
+            <tr style="background:#f1f5f9; font-weight:800;">
+                <td colspan="2" style="text-align:right;">કુલ સરવાળો:</td>
+                <td style="text-align:right;">₹ ${grandTotal.toFixed(2)}</td>
+                <td style="text-align:right; font-size:11px;">₹ ${splitEdpTotal}</td>
+            </tr>
+        `;
+
+        // Section 3: Beneficiary rows (Line by line aligned)
+        let beneRows = '';
+        beneficiaries.forEach((b, idx) => {
+            const bSplitTotal = (b.total * multiplier).toFixed(2);
+
+            let breakdownTable = '<table class="sub-align-table">';
+            b.heads.forEach(h => {
+                const headSplitAmt = (h.amount * multiplier).toFixed(2);
+                breakdownTable += `
+                    <tr>
+                        <td class="sub-head-name">${h.head}</td>
+                        <td class="sub-head-amt">₹ ${headSplitAmt}</td>
+                    </tr>
+                `;
+            });
+            breakdownTable += '</table>';
+
+            beneRows += `
+                <tr>
+                    <td style="text-align:center; font-weight:700; width:28px;">${idx + 1}</td>
+                    <td style="width:180px;"><strong style="font-size:11px;">${b.name}</strong></td>
+                    <td style="text-align:right; font-weight:800; font-size:11px; width:100px; background:#fafafa;">₹ ${bSplitTotal}</td>
+                    <td style="padding: 2px 4px;">${breakdownTable}</td>
+                </tr>
+            `;
+        });
+
+        return `
+            <div class="sheet-section-half">
+                <div class="sheet-header-card">
+                    <h2>${school}</h2>
+                    <div class="sheet-header-meta">UDISE કોડ: ${udise} | SNA સ્પર્શ પૂર્વ તૈયારી વાઉચર સ્લિપ (માત્ર અંગત જાણકારી અર્થે)</div>
+                    <div class="sheet-badge" style="background:${badgeBg};">${percentText} બિલની વિગત</div>
+                </div>
+
+                <div class="voucher-meta-row">
+                    <div><strong>વાઉચર સંદર્ભ / ફાઈલ નં:</strong> ${voucher}</div>
+                    <div><strong>તારીખ:</strong> ${bDate}</div>
+                </div>
+
+                <div class="sheet-section-title">૧. ઈ.ડી.પી. ડિટેલ્સ (૩૧૩૫ થી ૩૧૩૫)</div>
+                <div class="sheet-edp-box">
+                    <div>
+                        <strong>સ્પર્શ પોર્ટલમાં EDP 3135 to 3135 માં નાખવાની કુલ રકમ:</strong>
+                        <div style="font-size:9.5px; color:#475569;">(અંકે રૂપિયા: ${splitEdpWords})</div>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 900; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
+                        ₹ ${splitEdpTotal}
+                    </div>
+                </div>
+
+                <div class="sheet-section-title">૨. હેડ વાઇઝ રકમની વિગત (${percentText} રકમ)</div>
+                <table class="sheet-table">
+                    <thead>
+                        <tr>
+                            <th style="width:28px; text-align:center;">ક્રમ</th>
+                            <th>ગ્રાન્ટ હેડનું નામ / કમ્પોનન્ટ કોડ</th>
+                            <th style="text-align:right; width:100px;">કુલ મૂળ રકમ (૧૦૦%)</th>
+                            <th style="text-align:right; width:110px;">સ્પર્શમાં નાખવાની ${percentText} રકમ</th>
+                        </tr>
+                    </thead>
+                    <tbody>${headRows}</tbody>
+                </table>
+
+                <div class="sheet-section-title">૩. બેનિફિશિયરીઝ (લાભાર્થી) વાઇઝ ચૂકવવાની રકમ અને હેડ વાઇઝ વિગત</div>
+                <table class="sheet-table">
+                    <thead>
+                        <tr>
+                            <th style="width:28px; text-align:center;">ક્રમ</th>
+                            <th style="width:180px;">લાભાર્થીનું નામ</th>
+                            <th style="text-align:right; width:100px;">મળવાપાત્ર કુલ ${percentText} રકમ</th>
+                            <th>જે-તે હેડમાંથી લેવાની ${percentText} રકમની વિગત (લાઇન-બાય-લાઇન)</th>
+                        </tr>
+                    </thead>
+                    <tbody>${beneRows}</tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    // Modal Control: Open and Render Preview
+    function openPreviewModal(mode) {
+        if (beneficiaries.length === 0) {
+            alert('પહેલાં ઓછામાં ઓછો એક લાભાર્થી ઉમેરવો જરૂરી છે.');
+            return;
+        }
+
+        let fullHtml = '';
+
+        if (mode === '60') {
+            document.getElementById('modalHeading').innerHTML = `<span>👁️</span> ૬૦% બિલની પૂર્વ તૈયારી વિગત`;
+            fullHtml = generateSubSlipHtml(0.6, '૬૦%', '#059669');
+        } else if (mode === '40') {
+            document.getElementById('modalHeading').innerHTML = `<span>👁️</span> ૪૦% બિલની પૂર્વ તૈયારી વિગત`;
+            fullHtml = generateSubSlipHtml(0.4, '૪૦%', '#0284c7');
+        } else if (mode === 'both_a5') {
+            document.getElementById('modalHeading').innerHTML = `<span>📄</span> ૧ જ પેજમાં બંને બિલ (ઉપર ૬૦% + નીચે ૪૦% A5 સાઇઝ)`;
+            const slip60 = generateSubSlipHtml(0.6, '૬૦%', '#059669');
+            const slip40 = generateSubSlipHtml(0.4, '૪૦%', '#0284c7');
+            fullHtml = `
+                ${slip60}
+                <div class="cut-divider">
+                    <span class="cut-label">✂️ અહીથી કાપીને બે અલગ A5 સ્લિપ બનાવી શકો છો (૬૦% અને ૪૦%)</span>
+                </div>
+                ${slip40}
+            `;
+        }
+
+        document.getElementById('printableContent').innerHTML = fullHtml;
+        document.getElementById('previewModal').style.display = 'block';
+    }
+
+    function closePreviewModal() {
+        document.getElementById('previewModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('previewModal');
+        if (event.target === modal) {
+            closePreviewModal();
+        }
+    };
+
+    // Initialize datalist and form on page load
+    populateDatalist();
+    initHeadRow();
+    renderBeneficiariesTable();
+</script>
+
+</body>
+</html>
